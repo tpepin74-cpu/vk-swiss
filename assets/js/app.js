@@ -156,27 +156,140 @@
     });
   });
 
-  /* ---------- Conseiller VK : arbre de décision ---------- */
-  var ast = $("#ast"), body = ast && $(".ast__body", ast), hist = [];
-  var T = D.tree || {};
-  function openAst() { if (!ast) return; ast.classList.add("is-open"); ast.removeAttribute("inert"); ast.setAttribute("aria-hidden", "false"); if (!hist.length) go("start"); $$("[data-ast-open]").forEach(function (b) { b.setAttribute("aria-expanded", "true"); }); }
-  function closeAst() { if (!ast) return; ast.classList.remove("is-open"); ast.setAttribute("inert", ""); ast.setAttribute("aria-hidden", "true"); $$("[data-ast-open]").forEach(function (b) { b.setAttribute("aria-expanded", "false"); }); }
-  function link(u) { return /^(https?:|tel:|mailto:)/.test(u) ? u : BASE + u; }
-  function mailUrl(topic) { return BASE + "contact.html?sujet=" + encodeURIComponent(topic || "Demande de conseil") + "#formulaire"; }
-  function go(id, label) {
-    var n = T[id]; if (!n || !body) return;
-    if (label) { var y = document.createElement("p"); y.className = "ast__you"; y.textContent = label; body.appendChild(y); }
-    hist.push(id);
-    $$(".ast__back", body).forEach(function (x) { x.remove(); });
-    var m = document.createElement("div"); m.className = "ast__msg"; m.innerHTML = n.text; body.appendChild(m);
-    var o = document.createElement("div"); o.className = "ast__opts";
-    (n.links || []).forEach(function (l) { var a = document.createElement("a"); a.href = link(l[1]); a.className = "go"; a.innerHTML = "<span>" + l[0] + "</span><span aria-hidden=\"true\">→</span>"; o.appendChild(a); });
-    (n.opts || []).forEach(function (op) { var b = document.createElement("button"); b.type = "button"; b.innerHTML = "<span>" + op[0] + "</span><span aria-hidden=\"true\">›</span>"; b.addEventListener("click", function () { $$("button", o).forEach(function (x) { x.disabled = true; }); go(op[1], op[0]); }); o.appendChild(b); });
-    if (id !== "start") { var r = document.createElement("button"); r.type = "button"; r.className = "ast__back"; r.textContent = "↺ Revenir au début"; r.addEventListener("click", function () { body.innerHTML = ""; hist = []; go("start"); }); o.appendChild(r); }
-    body.appendChild(o);
-    var mail = $("[data-ast-mail]", ast); if (mail) mail.href = mailUrl(n.topic);
-    setTimeout(function () { body.scrollTop = body.scrollHeight; }, 30);
+  /* ---------- Conseiller VK : chatbot basé sur les contenus du site (100 % local, sans IA externe) ---------- */
+  var ast = $("#ast"), body = ast && $(".ast__body", ast), form = ast && $("[data-ast-form]", ast), started = false;
+  var KB = D.kb || [], STORES = D.stores || [];
+  var STOP = "a au aux avec ce ces c cela comme dans de des du elle en est et etre il ils je j l la le les leur lui ma mais me mes moi mon ne nos notre nous on ou par pas pour qu que qui sa se ses son sur ta te tes toi ton tu un une vos votre vous y d s n m t est-ce quoi bonjour salut merci svp stp peut peux puis faut avoir fait faire bien tres plus quel quelle quels quelles comment pourquoi contre mal marche devenir travail boulot veux voudrais aimerais souhaite cherche besoin savoir dire il elle fait-il est-ce qu ca cest ai suis es sont avez".split(" ");
+  var SYN = { fatigue: "energie", fatigu: "energie", creve: "energie", epuis: "energie", tonus: "energie", vitalit: "energie",
+    stress: "stress", stresse: "stress", angoiss: "anxiete", calm: "calme", dorm: "sommeil", dors: "sommeil", dodo: "sommeil", reveil: "sommeil", insomni: "sommeil",
+    memoir: "memoire", concentr: "concentration", exam: "examen", etud: "etude",
+    femm: "femme", regl: "regles", menopaus: "menopause", homm: "homme", libid: "libido", muscl: "muscle",
+    enceint: "enceinte", allait: "allaitement", grosses: "grossesse", medic: "medicament", traitem: "traitement",
+    cout: "prix", tarif: "prix", combien: "prix", cher: "prix", achet: "acheter", command: "commander",
+    livr: "livraison", envoi: "livraison", expedi: "livraison", colis: "livraison", port: "livraison",
+    pay: "paiement", paie: "paiement", carte: "carte", twint: "twint", paypal: "paypal",
+    pharma: "pharmacie", drogu: "droguerie", magasin: "pharmacie", trouv: "pharmacie", acheter: "acheter",
+    compos: "composition", ingredi: "ingredient", conti: "contient", allerg: "allergene", lactos: "lactose",
+    abonn: "abonnement", resili: "resilier", prend: "prendre", pris: "prise", dose: "dose", posolog: "posologie",
+    ashwa: "ashwagandha", ashvagandha: "ashwagandha", withania: "ashwagandha", shila: "shilajit", brahmi: "bacopa", bacop: "bacopa",
+    shatav: "shatavari", tribul: "tribulus", curcum: "curcuma", turmeric: "curcuma", piperin: "curcuma", poivr: "curcuma",
+    vegan: "vegan", vegetal: "vegetalien", vegetari: "vegetarien" };
+  function norm(t) { return (t || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9\s-]/g, " "); }
+  var EXACT = { pharmacien: "revendeur", pharmaciens: "revendeur", pharmacienne: "revendeur", droguiste: "revendeur", revendre: "revendeur", revendeurs: "revendeur", vendre: "revendeur" };
+  function toks(t) {
+    return norm(t).split(/[\s-]+/).filter(function (w) { return w.length > 1 && STOP.indexOf(w) < 0; }).map(function (w) {
+      if (EXACT[w]) return EXACT[w];
+      for (var k in SYN) { if (w.indexOf(k) === 0) return SYN[k]; }
+      return w.length > 4 ? w.replace(/(es|s|x)$/, "") : w;
+    });
   }
+  // index TF-IDF léger
+  var DOCS = KB.map(function (e) { var m = {}; toks(e.k).forEach(function (w) { m[w] = 1; }); toks(e.t).forEach(function (w) { m[w] = 1.6; }); return m; });
+  var DF = {}; DOCS.forEach(function (m) { for (var w in m) DF[w] = (DF[w] || 0) + 1; });
+  function idf(w) { return Math.log(1 + KB.length / (DF[w] || 0.5)); }
+  function prefixHit(m, w) { if (m[w]) return m[w]; if (w.length < 5) return 0; for (var k in m) { if (k.length > 4 && (k.indexOf(w.slice(0, 5)) === 0)) return 0.6; } return 0; }
+  var PRODS = (D.products || []).map(function (p) { return p.slug; });
+  var ASPECT = { compo: ["composition", "ingredient", "contient", "allergene", "lactose", "gelatine", "mg", "dosage", "vegan"],
+    prec: ["precaution", "anticoagulant", "interaction", "compatible", "pilule", "contraception", "effet", "enceinte", "allaitement", "grossesse", "traitement", "medicament", "danger", "risque", "contre", "secondaire", "enfant", "deconseille"],
+    usage: ["prendre", "prise", "dose", "posologie", "quand", "moment", "matin", "soir", "duree", "cure", "gelule"],
+    prix: ["prix", "acheter", "commander", "abonnement", "chf"] };
+  var GREET = ["bonjour", "salut", "hello", "bonsoir", "coucou", "hey", "merci", "aide", "aidez"];
+  function answer(q) {
+    var raw = norm(q).split(/\s+/).filter(Boolean);
+    if (raw.length && raw.length <= 4 && raw.every(function (w) { return GREET.indexOf(w) >= 0 || STOP.indexOf(w) >= 0 || w.length < 3; })) return KB.filter(function (e) { return e.id === "hello"; });
+    var qt = toks(q); if (!qt.length) return null;
+    // 1) produit + facette
+    var prod = PRODS.filter(function (s) { return qt.indexOf(s) >= 0; })[0];
+    if (prod) {
+      var asp = "info";
+      for (var a in ASPECT) { if (qt.some(function (w) { return ASPECT[a].indexOf(w) >= 0; })) { asp = a; break; } }
+      var hit = KB.filter(function (e) { return e.p === prod && e.x === asp; })[0];
+      if (hit) return [hit];
+    }
+    // 2) recherche de pharmacie par ville / NPA
+    var wantsStore = qt.some(function (w) { return ["pharmacie", "droguerie", "point", "vente", "pres", "proche", "ou", "trouver", "magasin"].indexOf(w) >= 0; });
+    var nq = norm(q), places = [];
+    STORES.forEach(function (s) {
+      var addr = norm(s[1]).trim(); var m = addr.match(/\b(\d{4})\s+([a-z\s'-]+)$/);
+      var city = m ? m[2].trim() : "", npa = m ? m[1] : "";
+      var wb = function (t) { return new RegExp('(^|\\s)' + t.replace(/[-']/g, ' ').trim() + '(\\s|$)').test(nq.replace(/[-']/g, ' ')); };
+      if ((city && city.length > 2 && wb(city)) || (npa && wb(npa)) || wb(norm(s[2]))) places.push(s);
+    });
+    if (places.length) return [{ store: places, t: "Points de vente" }];
+    var healthWords = ["medicament", "traitement", "maladie", "diabete", "tension", "hypertension", "cancer", "medecin", "soigner", "guerir", "symptome", "douleur"];
+    var hEntry = KB.filter(function (e) { return e.id === "sante"; })[0];
+    if (hEntry && !prod && qt.some(function (w) { return healthWords.indexOf(w) >= 0; })) return [hEntry];
+    // 3) score TF-IDF + couverture de la question
+    var qmax = qt.reduce(function (t, w) { return t + idf(w); }, 0);
+    var scored = KB.map(function (e, i) {
+      var sc = 0, cov = 0; qt.forEach(function (w) { var h = prefixHit(DOCS[i], w); if (h) { sc += h * idf(w); cov += idf(w); } });
+      if (prod && e.p === prod) sc += 2;
+      return { e: e, sc: sc, cov: qmax ? cov / qmax : 0 };
+    }).sort(function (x, y) { return y.sc - x.sc; });
+    var top = scored[0];
+    if (wantsStore && (!top || top.cov < 0.6)) return [{ store: [], t: "Points de vente" }];
+    if (!top || top.sc < 1.2 || top.cov < 0.55) return null;
+    var res = [top.e];
+    if (scored[1] && scored[1].sc > top.sc * 0.85 && scored[1].cov >= 0.55 && scored[1].e.p !== top.e.p) res.push(scored[1].e);
+    // une question de santé commence toujours par l'avertissement
+    var health = KB.filter(function (e) { return e.id === "sante"; })[0];
+    if (health && qt.some(function (w) { return ["medicament", "traitement", "maladie", "diabete", "tension", "hypertension", "cancer", "medecin", "soigner", "guerir"].indexOf(w) >= 0; })) {
+      res = res.filter(function (e) { return e !== health && e.id !== "resultat"; }); res.unshift(health);
+    }
+    return res;
+  }
+  function linkTo(u) { return /^(https?:|tel:|mailto:)/.test(u) ? u : BASE + u; }
+  function mailUrl(topic, q) { return BASE + "contact.html?sujet=" + encodeURIComponent(topic || "Demande de conseil") + (q ? "&msg=" + encodeURIComponent(q) : "") + "#formulaire"; }
+  function bubble(cls, html) { var d = document.createElement("div"); d.className = cls; d.innerHTML = html; body.appendChild(d); return d; }
+  function esc(t) { return String(t).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
+  function scroll() { setTimeout(function () { body.scrollTop = body.scrollHeight; }, 30); }
+  function chips(list) {
+    var o = document.createElement("div"); o.className = "ast__chips";
+    list.forEach(function (t) { var b = document.createElement("button"); b.type = "button"; b.textContent = t; b.addEventListener("click", function () { ask(t); }); o.appendChild(b); });
+    body.appendChild(o);
+  }
+  function reply(q) {
+    var res = answer(q), mail = $("[data-ast-mail]", ast);
+    if (!res) {
+      bubble("ast__msg", "Je n'ai pas trouvé de réponse précise dans nos contenus. Un membre de l'équipe VK Swiss vous répond personnellement : appelez-nous ou envoyez votre question, elle est déjà pré-remplie.");
+      var o = document.createElement("div"); o.className = "ast__opts";
+      o.innerHTML = '<a class="go" href="' + mailUrl("Question au conseiller", q) + '"><span>Envoyer ma question par e-mail</span><span aria-hidden="true">→</span></a><a href="tel:' + TEL + '"><span>Appeler le ' + TEL_TXT + '</span><span aria-hidden="true">›</span></a>';
+      body.appendChild(o); if (mail) mail.href = mailUrl("Question au conseiller", q); scroll(); return;
+    }
+    res.forEach(function (e) {
+      if (e.store) {
+        if (!e.store.length) { bubble("ast__msg", "Indiquez-moi votre ville ou votre NPA (par ex. « pharmacie à Sion » ou « 2900 ») et je vous donne les points de vente les plus proches. Plus de 120 pharmacies et drogueries proposent VK Swiss en Suisse."); }
+        else {
+          var h = "<strong>" + e.store.length + " point" + (e.store.length > 1 ? "s" : "") + " de vente trouvé" + (e.store.length > 1 ? "s" : "") + " :</strong><ul class=\"ast__list\">" + e.store.slice(0, 6).map(function (s) { return "<li><strong>" + esc(s[0]) + "</strong><br>" + esc(s[1]) + "</li>"; }).join("") + "</ul>";
+          bubble("ast__msg", h);
+        }
+        var o2 = document.createElement("div"); o2.className = "ast__opts"; o2.innerHTML = '<a class="go" href="' + BASE + 'points-de-vente.html"><span>Voir tous les points de vente</span><span aria-hidden="true">→</span></a>'; body.appendChild(o2);
+        if (mail) mail.href = mailUrl("Point de vente", q);
+        return;
+      }
+      bubble("ast__msg", e.a);
+      if (e.l && e.l.length) { var o = document.createElement("div"); o.className = "ast__opts"; e.l.forEach(function (l) { var a = document.createElement("a"); a.href = linkTo(l[1]); a.className = "go"; a.innerHTML = "<span>" + esc(l[0]) + "</span><span aria-hidden=\"true\">→</span>"; o.appendChild(a); }); body.appendChild(o); }
+      if (mail) mail.href = mailUrl(e.topic, q);
+    });
+    bubble("ast__hint", "Une autre question ? Écrivez-la ci-dessous, ou contactez-nous directement.");
+    scroll();
+  }
+  function ask(q) {
+    q = (q || "").trim(); if (!q || !body) return;
+    $$(".ast__chips", body).forEach(function (c) { c.remove(); });
+    var y = document.createElement("p"); y.className = "ast__you"; y.textContent = q; body.appendChild(y);
+    var typing = bubble("ast__typing", "<i></i><i></i><i></i>"); typing.setAttribute("aria-label", "Le conseiller écrit");
+    scroll();
+    setTimeout(function () { typing.remove(); reply(q); }, 450 + Math.min(700, q.length * 12));
+  }
+  function start() {
+    if (started || !body) return; started = true;
+    bubble("ast__msg", "Bonjour, je suis le <strong>conseiller VK Swiss</strong>. Posez-moi votre question sur nos formules, le ghee, les précautions, la livraison ou nos pharmacies : je réponds à partir des contenus du site.");
+    chips(D.suggest || []);
+  }
+  function openAst() { if (!ast) return; ast.classList.add("is-open"); ast.removeAttribute("inert"); ast.setAttribute("aria-hidden", "false"); start(); $$("[data-ast-open]").forEach(function (b) { b.setAttribute("aria-expanded", "true"); }); var i = $("#ast-q"); if (i && matchMedia("(min-width: 861px)").matches) i.focus(); }
+  function closeAst() { if (!ast) return; ast.classList.remove("is-open"); ast.setAttribute("inert", ""); ast.setAttribute("aria-hidden", "true"); $$("[data-ast-open]").forEach(function (b) { b.setAttribute("aria-expanded", "false"); }); }
+  form && form.addEventListener("submit", function (e) { e.preventDefault(); var i = $("#ast-q"); ask(i.value); i.value = ""; });
   $$("[data-ast-open]").forEach(function (b) { b.addEventListener("click", function (e) { e.preventDefault(); ast && ast.classList.contains("is-open") ? closeAst() : openAst(); }); });
   $$("[data-ast-close]").forEach(function (b) { b.addEventListener("click", closeAst); });
   if (location.hash === "#conseiller") openAst();

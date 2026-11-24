@@ -36,10 +36,13 @@ Widget **Formulaire**, nom « Demande VK Swiss », champs (ID) :
 4. (optionnel) Webhook / Mailchimp.
 Pré-remplissage du sujet depuis le conseiller : valeur par défaut du champ `sujet` = `[elementor-tag name="request-arg"]`… ou via *Dynamic Tags › Request Parameter* (`sujet`). reCAPTCHA v3 (clés gérées par l'agence). SMTP : WP Mail SMTP.
 
-## 5. Conseiller VK (arbre de décision)
-- Fichiers `assets/js/data.js` (arbre `tree`) et `assets/js/app.js` (moteur) à enqueue via un snippet (Code Snippets) ou widget HTML global dans le footer Theme Builder.
-- Chaque nœud : texte, options, liens vers pages, `topic` → le bouton « Écrire » ouvre `/contact/?sujet=<topic>#formulaire` (pré-rempli), le bouton « Appeler » `tel:+41792890449`.
-- Aucune IA, aucune donnée stockée : 100 % déterministe, conforme nLPD.
+## 5. Conseiller VK (chatbot basé sur les contenus du site)
+- Saisie libre (« Quelle formule contre la fatigue ? », « pharmacie à Sion », « je suis enceinte… ») + suggestions cliquables.
+- Moteur 100 % local (`assets/js/app.js`) : normalisation du français, synonymes, recherche TF-IDF sur une base de connaissances générée depuis les contenus du site (`build/kb.py` → `assets/js/data.js`) : 6 produits × 5 facettes (présentation, composition, précautions, utilisation, prix), besoins → formule, FAQ, ghee, ayurvéda, paiement, livraison, abonnement, revendeurs, et index des 123 points de vente (recherche par ville ou NPA).
+- Garde-fous : toute question de santé (maladie, traitement, grossesse…) renvoie d'abord vers un avis médical ; aucune promesse d'effet ; hors sujet → transfert humain.
+- Chaque réponse garde « Appeler » (`tel:+41792890449`) et « Écrire » → `/contact/?sujet=<thème>&msg=<question>#formulaire` (formulaire Elementor Pro pré-rempli via les balises dynamiques *Request Parameter* `sujet` et `msg`) → **Envois** + e-mail.
+- Aucune donnée envoyée à un tiers, aucun coût d'API, conforme nLPD. Évolution possible : brancher un LLM (AI Engine / API Claude) sur la même base de connaissances, avec les mêmes garde-fous.
+- WordPress : régénérer `data.js` à chaque changement de contenu (ou l'exposer via un endpoint REST JetEngine).
 
 ## 6. Version mobile « application »
 - Barre d'onglets fixe (Accueil, Boutique, Conseiller, Panier, Pharmacies) : section Elementor *sticky bottom*, visible < 860 px.

@@ -2,6 +2,7 @@
 """Générateur statique du site VK Swiss (maquette HTML avant reconstruction WordPress/Elementor Pro)."""
 import json, os, html
 from data import SITE, PRODUCTS, FAQ, STORES
+import kb
 
 OUT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 U = SITE["url"]
@@ -152,8 +153,9 @@ def footer(depth):
   <div class="drawer__foot" data-has-items><div class="sum"><span>Sous-total</span><strong data-sub></strong></div><a class="btn btn--red btn--block" href="{b}panier.html">Commander</a>{PAY}</div></div>
 </div>
 <section class="ast" id="ast" aria-hidden="true" inert aria-label="Conseiller VK Swiss">
- <div class="ast__head"><span class="swiss" aria-hidden="true" style="width:30px;height:30px"></span><div><strong>Conseiller VK Swiss</strong><small>Réponses immédiates · conseil humain si besoin</small></div><button class="ico" type="button" data-ast-close aria-label="Fermer le conseiller">{ICONS['close']}</button></div>
+ <div class="ast__head"><span class="swiss" aria-hidden="true" style="width:30px;height:30px"></span><div><strong>Conseiller VK Swiss</strong><small>Répond à partir des contenus du site · conseil humain si besoin</small></div><button class="ico" type="button" data-ast-close aria-label="Fermer le conseiller">{ICONS['close']}</button></div>
  <div class="ast__body" aria-live="polite"></div>
+ <form class="ast__form" data-ast-form autocomplete="off"><label class="sr" for="ast-q">Votre question</label><input id="ast-q" name="q" type="text" maxlength="200" placeholder="Posez votre question…" enterkeyhint="send"><button type="submit" aria-label="Envoyer la question"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button></form>
  <div class="ast__cta"><a class="btn btn--ghost" href="tel:{SITE['tel_href']}">{ICONS['phone'].replace('<svg','<svg width="16" height="16" style="stroke:currentColor;fill:none"')} Appeler</a><a class="btn btn--red" data-ast-mail href="{b}contact.html#formulaire">Écrire</a></div>
 </section>
 <button class="ast-fab" type="button" data-ast-open aria-controls="ast" aria-expanded="false"><i aria-hidden="true"></i>Un conseil&nbsp;?</button>
@@ -481,7 +483,7 @@ def seo():
            "icons":[{"src":"assets/img/icon-192.png","sizes":"192x192","type":"image/png"},{"src":"assets/img/icon-512.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}]}
     write("manifest.webmanifest", json.dumps(man, ensure_ascii=False, indent=1))
     write("sw.js", "const C='vk-v1';self.addEventListener('install',e=>{e.waitUntil(caches.open(C).then(c=>c.addAll(['./','./index.html','./boutique.html','./assets/css/style.css','./assets/js/app.js','./assets/js/data.js'])).then(()=>self.skipWaiting()))});\nself.addEventListener('activate',e=>e.waitUntil(self.clients.claim()));\nself.addEventListener('fetch',e=>{if(e.request.method!=='GET')return;e.respondWith(fetch(e.request).then(r=>{const cp=r.clone();caches.open(C).then(c=>c.put(e.request,cp));return r}).catch(()=>caches.match(e.request)))});\n")
-    data = {"products":[{k:p[k] for k in ("slug","name","full","price","img","url","color")} for p in PRODUCTS],"tree":TREE}
+    data = {"products":[{k:p[k] for k in ("slug","name","full","price","img","url","color")} for p in PRODUCTS],"kb":kb.KB,"stores":kb.STORE_LIST,"suggest":kb.SUGGEST}
     write("assets/js/data.js", "window.VK=" + json.dumps(data, ensure_ascii=False) + ";\n")
 
 if __name__ == "__main__":
