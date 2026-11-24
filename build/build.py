@@ -45,7 +45,7 @@ TREE = {
  "start": {"text": "Bonjour, je suis le <strong>conseiller VK Swiss</strong>. Choisissez votre question, je vous guide vers la bonne réponse.",
            "opts": [["Choisir ma formule","choisir"],["Comprendre le ghee suisse","ghee"],["Utilisation & précautions","usage"],["Commande, paiement, livraison","commande"],["Trouver une pharmacie","pdv"],["Je suis pharmacien / revendeur","pro"],["Parler à quelqu'un","humain"]], "topic":"Demande de conseil"},
  "choisir": {"text":"Quelle intention souhaitez-vous accompagner au quotidien ?",
-             "opts":[["Énergie & vitalité","f_shilajit"],["Clarté & concentration","f_bacopa"],["Calme & sérénité","f_ashwagandha"],["Bien-être féminin","f_shatavari"],["Vitalité masculine","f_tribulus"],["Un rituel quotidien, digestion","f_curcuma"],["Je ne sais pas encore","hesite"]], "topic":"Choix d'une formule"},
+             "opts":[["Énergie & vitalité","f_shilajit"],["Clarté & concentration","f_bacopa"],["Calme & sérénité","f_ashwagandha"],["Bien-être féminin","f_shatavari"],["Vitalité masculine","f_tribulus"],["Un rituel quotidien","f_curcuma"],["Je ne sais pas encore","hesite"]], "topic":"Choix d'une formule"},
  "hesite": {"text":"Aucun souci. Chaque formule associe une plante ayurvédique à du ghee suisse, à raison d'une gélule par jour. Le plus simple : en parler 5 minutes avec nous, ou découvrir la collection classée par intention.",
             "links":[["Voir la collection par intention","boutique.html"],["Lire le guide : bien choisir sa formule","ayurveda.html#choisir"]], "topic":"Aide au choix d'une formule"},
  "ghee": {"text":"Le ghee est un beurre clarifié : on retire l'eau et les protéines du lait pour ne garder qu'une matière grasse pure et dorée. En ayurvéda, il accompagne traditionnellement les plantes. Le nôtre est produit en Suisse, à partir de lait suisse.",
@@ -107,7 +107,7 @@ def head(title, desc, path, depth, ld, og_img="assets/img/hero-alpes.jpg", extra
 def header(depth, cur, over=False):
     b = "../" * depth
     nav = "".join(f'<a href="{b}{h}"{" aria-current=\"page\"" if k==cur else ""}>{t}</a>' for h,t,k in NAV)
-    logo = f'<a class="logo" href="{b}index.html" aria-label="VK Swiss, accueil"><img src="{b}assets/img/logo.png" alt="VK Swiss" width="54" height="52" onerror="this.outerHTML=\'<b>VK</b><small>SWISS</small>\'"></a>'
+    logo = f'<a class="logo" href="{b}index.html" aria-label="VK Swiss, accueil"><img src="{b}assets/img/logo.png" alt="VK Swiss" width="56" height="54" onerror="this.outerHTML=\'<b>VK</b><small>SWISS</small>\'"></a>'
     tabs = [("index.html","Accueil","home","home"),("boutique.html","Boutique","grid","boutique"),(None,"Conseiller","chat","ast"),("panier.html","Panier","bag","panier"),("points-de-vente.html","Pharmacies","pin","pdv")]
     tb = ""
     for h,t,i,k in tabs:
@@ -137,7 +137,7 @@ def footer(depth):
   <div class="ftr__news"><div><p class="eyebrow" style="color:#9a9a9a">La lettre VK Swiss</p><p class="h3" style="color:#fff;margin-top:10px">Rituels, nouveautés et −10 % sur votre première commande.</p></div>
    <form data-demo novalidate><label class="sr" for="nl">Votre adresse e-mail</label><input id="nl" type="email" required autocomplete="email" placeholder="Votre adresse e-mail"><button type="submit">S'inscrire</button><p data-ok hidden tabindex="-1" style="margin:10px 0 0">Merci ! Votre code de bienvenue arrive par e-mail.</p></form></div>
   <div class="ftr__cols">
-   <div><a class="logo" href="{b}index.html" style="align-items:flex-start;color:#fff"><b>VK</b><small>SWISS</small></a><p style="margin-top:20px;max-width:300px">La première maison à unir le ghee des Alpes suisses aux plantes de l'ayurvéda.</p><p>Distribution : {SITE['distrib']}</p><p><a href="tel:{SITE['tel_href']}">{SITE['tel']}</a><br><a href="mailto:{SITE['email']}">{SITE['email']}</a></p></div>
+   <div><a class="logo" href="{b}index.html" style="align-items:flex-start"><img src="{b}assets/img/logo.png" alt="VK Swiss" width="64" height="61" style="filter:invert(1);height:61px" loading="lazy"></a><p style="margin-top:20px;max-width:300px">La première maison à unir le ghee des Alpes suisses aux plantes de l'ayurvéda.</p><p>Distribution : {SITE['distrib']}</p><p><a href="tel:{SITE['tel_href']}">{SITE['tel']}</a><br><a href="mailto:{SITE['email']}">{SITE['email']}</a></p></div>
    <div><h4>La collection</h4><ul>{prods}</ul></div>
    <div><h4>La Maison</h4><ul><li><a href="{b}maison.html">Notre histoire</a></li><li><a href="{b}maison.html#ghee">Le ghee suisse</a></li><li><a href="{b}ayurveda.html">Ayurvéda & ghee</a></li><li><a href="{b}points-de-vente.html">Points de vente</a></li><li><a href="{b}contact.html?sujet=Demande%20revendeur#formulaire">Devenir revendeur</a></li></ul></div>
    <div><h4>Services</h4><ul><li><a href="{b}faq.html">Questions fréquentes</a></li><li><a href="{b}livraison-retours.html">Livraison & retours</a></li><li><a href="{b}contact.html">Contact</a></li><li><a href="https://www.instagram.com/vk___swiss/" rel="noopener">Instagram</a> · <a href="https://www.tiktok.com/@vkswiss" rel="noopener">TikTok</a></li></ul><div style="margin-top:22px">{PAY}</div></div>
@@ -206,7 +206,7 @@ def page_home():
 <div class="marquee" aria-hidden="true">{marquee*3}</div>
 <section class="sec" id="collection"><div class="wrap">
  <div class="sec__head rv"><p class="eyebrow">La collection</p><h2 class="h2">Six plantes. Un seul ghee.</h2><p class="lead">Chaque gélule réunit une plante emblématique de l'ayurvéda et un ghee pur, produit en Suisse à partir de lait suisse. 30 gélules, une cure d'un mois.</p></div>
- <div class="grid">{tiles}</div>
+ <div class="grid grid--all">{tiles}</div>
  <p class="center" style="margin-top:48px"><a class="link" href="boutique.html">Voir toute la collection</a></p>
 </div></section>
 <section class="sec sec--stone"><div class="wrap split">
@@ -247,7 +247,7 @@ def page_shop():
     s += f'''<main id="main"><section class="sec" style="padding-top:64px"><div class="wrap">
 <div class="sec__head"><p class="crumbs"><a href="index.html">Accueil</a> / La collection</p><h1 class="h1" style="font-size:clamp(40px,5vw,68px)">La collection</h1><p class="lead">Six plantes de la tradition ayurvédique, une même signature : le ghee suisse. Choisissez par intention.</p></div>
 <div class="chips" role="group" aria-label="Filtrer par intention">{chips}</div>
-<div class="grid grid--all" style="grid-template-columns:repeat(3,minmax(0,1fr))">{''.join(tile(p,0) for p in PRODUCTS)}</div>
+<div class="grid grid--all">{''.join(tile(p,0) for p in PRODUCTS)}</div>
 </div></section>
 <section class="sec sec--stone"><div class="wrap split"><div class="split__body"><p class="eyebrow">Abonnement</p><h2 class="h2">−15 % sur chaque pot. Sans engagement.</h2><p>Recevez votre formule tous les 30 jours, avant la fin de votre pot. Décalez, modifiez ou arrêtez en un clic.</p></div><div class="split__body"><p class="eyebrow">Hésitation ?</p><h2 class="h3">Notre conseiller vous oriente en quelques questions.</h2><p><button class="btn" type="button" data-ast-open aria-controls="ast">Trouver ma formule</button></p></div></div></section>
 <section class="sec sec--ink"><div class="wrap">{SERVICES}</div></section></main>'''
@@ -296,7 +296,7 @@ def page_product(p):
  </div>
 </div></div>
 <section class="sec sec--stone" style="margin-top:80px"><div class="wrap split"><div class="split__media"><img src="../assets/img/ayurveda.jpg" alt="Nature morte ayurvédique : épices, racines et cuillère en laiton sur lin" loading="lazy" width="1024" height="1280"></div><div class="split__body"><p class="eyebrow">Pourquoi le ghee ?</p><h2 class="h2">Le geste ancestral, encapsulé.</h2><p>En ayurvéda, {p['name'].lower() if p['slug']!='curcuma' else 'le curcuma'} est traditionnellement associé à une matière grasse noble : le ghee. Chaque gélule VK Swiss réunit les deux, avec un ghee pur produit en Suisse.</p><a class="link" href="../ayurveda.html#pourquoi">Lire notre guide</a></div></div></section>
-<section class="sec"><div class="wrap"><div class="sec__head"><p class="eyebrow">À découvrir aussi</p><h2 class="h2">Compléter votre rituel</h2></div><div class="grid">{rel}</div></div></section>
+<section class="sec"><div class="wrap"><div class="sec__head"><p class="eyebrow">À découvrir aussi</p><h2 class="h2">Compléter votre rituel</h2></div><div class="grid grid--rel">{rel}</div></div></section>
 <div class="sticky-buy"><div><strong style="font-weight:400">{p['name']}</strong><br><small style="color:var(--grey)">{chf(PRICE)} · 30 gélules</small></div><button class="btn btn--red" type="button" data-add="{p['slug']}" data-open>Ajouter au panier</button></div>
 </main>'''
     s += footer(1)

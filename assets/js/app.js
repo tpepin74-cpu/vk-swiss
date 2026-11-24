@@ -167,6 +167,7 @@
     var n = T[id]; if (!n || !body) return;
     if (label) { var y = document.createElement("p"); y.className = "ast__you"; y.textContent = label; body.appendChild(y); }
     hist.push(id);
+    $$(".ast__back", body).forEach(function (x) { x.remove(); });
     var m = document.createElement("div"); m.className = "ast__msg"; m.innerHTML = n.text; body.appendChild(m);
     var o = document.createElement("div"); o.className = "ast__opts";
     (n.links || []).forEach(function (l) { var a = document.createElement("a"); a.href = link(l[1]); a.className = "go"; a.innerHTML = "<span>" + l[0] + "</span><span aria-hidden=\"true\">→</span>"; o.appendChild(a); });

@@ -15,7 +15,7 @@ CONSERV = "À conserver à température ambiante (15–25 °C), hors de portée 
 PRODUCTS = [
   {
     "slug": "ashwagandha", "name": "Ashwagandha", "full": "Ashwagandha KSM-66® & ghee suisse",
-    "latin": "Withania somnifera", "origin": "Inde", "color": "#42C0EF",
+    "latin": "Withania somnifera", "origin": "Inde", "color": "#61A331",
     "intent": "Sérénité", "intent_key": "serenite",
     "tagline": "La racine de la sérénité, portée par l'or des Alpes.",
     "short": "Extrait de racine KSM-66® standardisé à 5 % de withanolides, uni à 510 mg de ghee suisse.",
@@ -39,7 +39,7 @@ PRODUCTS = [
   },
   {
     "slug": "bacopa", "name": "Bacopa", "full": "Bacopa (Brahmi) & ghee suisse",
-    "latin": "Bacopa monnieri", "origin": "Inde", "color": "#61A331",
+    "latin": "Bacopa monnieri", "origin": "Inde", "color": "#42C0EF",
     "intent": "Concentration", "intent_key": "concentration",
     "tagline": "Le brahmi des sages, pour les esprits en mouvement.",
     "short": "200 mg d'extrait de Bacopa monnieri standardisé à 20 % de bacosides, uni à 500 mg de ghee suisse.",
