@@ -191,6 +191,7 @@ SERVICES = f'''<div class="services">
 # ---------------- Accueil ----------------
 def page_home():
     ld = [ORG, {"@context":"https://schema.org","@type":"WebSite","name":"VK Swiss","url":U,"inLanguage":"fr-CH"},
+          {"@context":"https://schema.org","@type":"VideoObject","name":"VK Swiss — L'or des Alpes, la sagesse de l'ayurvéda","description":"Film de marque VK Swiss : le ghee issu de lait suisse et six plantes ayurvédiques, une gélule par jour, fabriqué en Suisse.","thumbnailUrl":U+"/assets/img/pub-poster.jpg","contentUrl":U+"/assets/video/pub.mp4","uploadDate":"2026-11-24","duration":"PT55S","inLanguage":"fr-CH","transcript":"Au cœur des Alpes suisses, le lait des alpages donne naissance à un or pur : le ghee. Depuis des millénaires, l'ayurvéda l'associe aux plantes les plus précieuses. VK Swiss réunit ces deux mondes, en six formules d'exception. Une seule gélule par jour. Fabriquée en Suisse."},
           {"@context":"https://schema.org","@type":"ItemList","name":"Collection VK Swiss","itemListElement":[{"@type":"ListItem","position":i+1,"url":U+"/"+p["url"],"name":p["full"]} for i,p in enumerate(PRODUCTS)]}]
     tiles = "".join(tile(p,0) for p in PRODUCTS)
     marquee = "<span>Ghee issu de lait suisse</span><span>Plantes de tradition ayurvédique</span><span>Une gélule par jour</span><span>Fabriqué en Suisse</span><span>Plus de 120 pharmacies</span>"
@@ -217,6 +218,18 @@ def page_home():
  <p>Depuis des millénaires, l'ayurvéda n'administre presque jamais une plante seule : elle l'accompagne d'une matière grasse noble, le ghee. VK Swiss a fait de ce geste ancestral sa signature, avec un ghee pur produit en Suisse à partir de lait suisse, réputé pour ses alpages et ses standards de qualité.</p>
  <p>Le résultat : la première gamme au monde à unir le ghee suisse et les joyaux de l'ayurvéda, dans une gélule.</p>
  <a class="link" href="maison.html#ghee">De l'alpage à la gélule</a></div>
+</div></section>
+<section class="sec sec--ink film" id="film" aria-labelledby="film-t"><div class="wrap">
+ <div class="sec__head rv"><p class="eyebrow">Le film</p><h2 class="h2" id="film-t">L'or des Alpes, la sagesse de l'ayurvéda.</h2><p class="lead" style="color:#d7d7d7">Une minute pour découvrir la Maison VK Swiss, son ghee suisse et ses six formules.</p></div>
+ <div class="film__frame rv">
+  <video id="pub" preload="none" playsinline controls poster="assets/img/pub-poster.jpg" aria-describedby="film-transcript">
+   <source src="assets/video/pub-720.mp4" type="video/mp4" media="(max-width: 860px)"><source src="assets/video/pub.mp4" type="video/mp4">
+   <track kind="captions" src="assets/video/pub.fr.vtt" srclang="fr" label="Français" default>
+  </video>
+  <button class="film__play" type="button" data-film-play aria-label="Lire le film VK Swiss avec le son"><span aria-hidden="true"></span>Regarder le film · 55 s</button>
+ </div>
+ <div class="film__cta rv"><a class="btn btn--red" href="boutique.html">Découvrir la collection</a><button class="btn btn--light" type="button" data-ast-open aria-controls="ast">Trouver ma formule</button></div>
+ <details class="film__tr" id="film-transcript"><summary>Transcription du film</summary><p>Au cœur des Alpes suisses, le lait des alpages donne naissance à un or pur : le ghee. Depuis des millénaires, l'ayurvéda l'associe aux plantes les plus précieuses. Ashwagandha. Curcuma. Shilajit. VK Swiss réunit ces deux mondes, en six formules d'exception. Une seule gélule par jour. Fabriquée en Suisse. Commencez votre rituel dès aujourd'hui, en pharmacie ou sur vk-swiss.ch. VK Swiss. L'or des Alpes, la sagesse de l'ayurvéda.</p></details>
 </div></section>
 <section class="sec"><div class="wrap"><p class="quote rv">« Nous n'avons rien inventé. Nous avons simplement réuni ce que la Suisse et l'ayurvéda font de mieux. »</p><p class="center eyebrow" style="margin-top:28px">La Maison VK Swiss</p></div></section>
 <section class="sec sec--stone"><div class="wrap">

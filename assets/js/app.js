@@ -136,6 +136,16 @@
     pb && pb.addEventListener("click", function () { if (v.paused) { v.play(); pb.setAttribute("aria-label", "Mettre la vidéo en pause"); } else { v.pause(); pb.setAttribute("aria-label", "Lire la vidéo"); } });
   }
 
+  /* ---------- Film publicitaire ---------- */
+  var pub = $("#pub");
+  if (pub) {
+    var fr = pub.parentNode;
+    $$("[data-film-play]").forEach(function (b) { b.addEventListener("click", function () { pub.muted = false; pub.play(); }); });
+    pub.addEventListener("play", function () { fr.classList.add("is-playing"); if (v && !v.paused) v.pause(); });
+    pub.addEventListener("pause", function () { fr.classList.remove("is-playing"); });
+    pub.addEventListener("ended", function () { fr.classList.remove("is-playing"); });
+  }
+
   /* ---------- Apparition au scroll ---------- */
   if ("IntersectionObserver" in window) {
     var io = new IntersectionObserver(function (es) { es.forEach(function (x) { if (x.isIntersecting) { x.target.classList.add("in"); io.unobserve(x.target); } }); }, { rootMargin: "0px 0px -8% 0px" });

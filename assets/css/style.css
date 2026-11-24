@@ -377,3 +377,16 @@ h1,h2,h3{margin:0}
 .ast__typing i{width:7px;height:7px;border-radius:50%;background:#9a9a9a;animation:vkdot 1s infinite ease-in-out}
 .ast__typing i:nth-child(2){animation-delay:.15s}.ast__typing i:nth-child(3){animation-delay:.3s}
 @keyframes vkdot{0%,80%,100%{opacity:.3;transform:translateY(0)}40%{opacity:1;transform:translateY(-3px)}}
+
+/* Film publicitaire */
+.film__frame{position:relative;aspect-ratio:16/9;background:#000;max-width:1200px;margin:0 auto;overflow:hidden}
+.film__frame video{width:100%;height:100%;object-fit:cover;display:block}
+.film__play{position:absolute;inset:auto auto 50% 50%;transform:translate(-50%,50%);display:flex;align-items:center;gap:14px;min-height:60px;padding:0 28px 0 12px;border-radius:999px;border:1px solid rgba(255,255,255,.7);background:rgba(17,17,17,.45);backdrop-filter:blur(8px);color:#fff;font-size:12.5px;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;transition:background .25s}
+.film__play:hover{background:rgba(17,17,17,.7)}
+.film__play span{width:40px;height:40px;border-radius:50%;background:#fff;position:relative}
+.film__play span::after{content:"";position:absolute;left:16px;top:12px;border-left:12px solid #111;border-top:8px solid transparent;border-bottom:8px solid transparent}
+.film__frame.is-playing .film__play{opacity:0;pointer-events:none}
+.film__cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:36px}
+.film__tr{max-width:860px;margin:28px auto 0;color:#bdbdbd;font-size:14px}
+.film__tr summary{cursor:pointer;letter-spacing:.16em;text-transform:uppercase;font-size:12px;text-align:center}
+@media (max-width:860px){.film__frame{margin:0 calc(var(--pad)*-1)}.film__play{padding:0 18px 0 10px;font-size:11px}.film__cta .btn{flex:1 1 100%}}
