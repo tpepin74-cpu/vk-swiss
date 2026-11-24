@@ -1,0 +1,115 @@
+# -*- coding: utf-8 -*-
+SITE = {
+    "name": "VK Swiss",
+    "url": "https://www.vk-swiss.ch",
+    "tel": "+41 79 289 04 49",
+    "tel_href": "+41792890449",
+    "email": "info@vk-swiss.ch",
+    "distrib": "AXES Sàrl, Case postale 27, 2854 Bassecourt, Suisse",
+    "price": 39.90,
+}
+
+COMMON_CAPSULE = "gélatine (poisson)*, glycérol, eau, sorbitol"
+CONSERV = "À conserver à température ambiante (15–25 °C), hors de portée des jeunes enfants."
+
+PRODUCTS = [
+  {
+    "slug": "ashwagandha", "name": "Ashwagandha", "full": "Ashwagandha KSM-66® & ghee suisse",
+    "latin": "Withania somnifera", "origin": "Inde", "color": "#42C0EF",
+    "intent": "Sérénité", "intent_key": "serenite",
+    "tagline": "La racine de la sérénité, portée par l'or des Alpes.",
+    "short": "Extrait de racine KSM-66® standardisé à 5 % de withanolides, uni à 510 mg de ghee suisse.",
+    "story": "Plante adaptogène emblématique de l'ayurvéda, l'ashwagandha accompagne depuis des siècles les rituels d'équilibre et de calme intérieur. Nous avons choisi l'extrait KSM-66®, obtenu exclusivement à partir de racines, sans ajout de feuilles, et standardisé à 5 % de withanolides. Fidèles à la tradition, nous l'associons à un ghee pur issu de lait suisse.",
+    "points": ["Extrait KSM-66®, racines uniquement", "Standardisé à 5 % de withanolides", "340 mg d'extrait bio par gélule", "510 mg de ghee issu de lait suisse"],
+    "moment": "Le soir, au calme, avec un verre d'eau.",
+    "ingredients": "Ghee (matière grasse laitière anhydre)* 510 mg, extrait d'ashwagandha bio (KSM-66®, racines, 5 % de withanolides) 340 mg, huile de colza raffinée, émulsifiant : lécithine de tournesol.",
+    "precautions": "Demander conseil à un spécialiste en cas de grossesse ou d'allaitement, avant 16 ans ou en cas de traitement médical. Ne pas dépasser la dose journalière indiquée. Les compléments alimentaires ne remplacent pas une alimentation variée et équilibrée.",
+  },
+  {
+    "slug": "shilajit", "name": "Shilajit", "full": "Shilajit naturel & ghee suisse",
+    "latin": "Asphaltum punjabianum", "origin": "Inde", "color": "#634897",
+    "intent": "Énergie", "intent_key": "energie",
+    "tagline": "La résine des cimes, pour les journées qui comptent.",
+    "short": "340 mg d'extrait de shilajit, dont 170 mg d'acide fulvique, uni à 500 mg de ghee suisse.",
+    "story": "Le shilajit est une résine minérale qui suinte des roches de haute montagne, vénérée par l'ayurvéda comme l'un de ses trésors. Naturellement riche en acide fulvique et en minéraux, il trouve chez VK Swiss un écho naturel : celui des sommets suisses, où naît le lait de notre ghee.",
+    "points": ["340 mg d'extrait de shilajit par gélule", "Dont 170 mg d'acide fulvique", "Naturellement riche en minéraux", "500 mg de ghee issu de lait suisse"],
+    "moment": "Le matin, pour commencer la journée.",
+    "ingredients": "Ghee (beurre clarifié, matière grasse laitière anhydre)* 500 mg, huile de colza, extrait de shilajit (Asphaltum punjabianum) 340 mg dont acide fulvique 170 mg, émulsifiant : lécithine de tournesol.",
+    "precautions": "Déconseillé aux femmes enceintes ou allaitantes et aux moins de 16 ans. Déconseillé en cas d'hypertension, de déséquilibre hormonal, d'ulcère ou de gastrite, de goutte, de maladie rénale ou hépatique, de diabète, de cholestérol ou d'hypothyroïdie. Sous traitement médical, demander conseil à un spécialiste. Ne pas dépasser la dose journalière indiquée.",
+  },
+  {
+    "slug": "bacopa", "name": "Bacopa", "full": "Bacopa (Brahmi) & ghee suisse",
+    "latin": "Bacopa monnieri", "origin": "Inde", "color": "#61A331",
+    "intent": "Concentration", "intent_key": "concentration",
+    "tagline": "Le brahmi des sages, pour les esprits en mouvement.",
+    "short": "200 mg d'extrait de Bacopa monnieri standardisé à 20 % de bacosides, uni à 500 mg de ghee suisse.",
+    "story": "Appelé brahmi en Inde, le bacopa est utilisé depuis des siècles dans la tradition ayurvédique, qui l'associe à la clarté de l'esprit. Notre extrait est standardisé à 20 % de bacosides, les composés naturellement présents dans la plante, et marié à un ghee suisse, comme le veut l'usage ayurvédique.",
+    "points": ["Extrait standardisé à 20 % de bacosides", "200 mg d'extrait par gélule", "Plante de tradition ayurvédique", "500 mg de ghee issu de lait suisse"],
+    "moment": "Le matin ou en début d'après-midi.",
+    "ingredients": "Ghee (beurre clarifié, matière grasse laitière anhydre)* 500 mg, huile de colza, extrait de Bacopa monnieri 200 mg, émulsifiant : lécithine de tournesol.",
+    "precautions": "Réservé à l'adulte. Déconseillé aux femmes enceintes ou allaitantes et aux personnes traitées par sédatifs, antidépresseurs ou anticonvulsivants. Peut influencer la vigilance : prudence en cas de conduite. En cas de troubles gastro-intestinaux, réduire ou interrompre la prise. Ne pas dépasser la dose journalière indiquée.",
+  },
+  {
+    "slug": "shatavari", "name": "Shatavari", "full": "Shatavari & ghee suisse",
+    "latin": "Asparagus racemosus Willd.", "origin": "Inde", "color": "#D78AB5",
+    "intent": "Féminin", "intent_key": "feminin",
+    "tagline": "La reine des plantes ayurvédiques, à chaque saison de la vie.",
+    "short": "350 mg de poudre de shatavari unis à 420 mg de ghee suisse.",
+    "story": "Son nom sanskrit évoque « celle qui possède cent racines ». Plante phare de l'ayurvéda au féminin, le shatavari y est traditionnellement associé à l'équilibre et à la vitalité des femmes, tout au long du cycle comme à la ménopause. Nous l'unissons à un ghee pur issu de lait suisse.",
+    "points": ["350 mg de shatavari par gélule", "Contient naturellement des saponines", "Plante de tradition ayurvédique au féminin", "420 mg de ghee issu de lait suisse"],
+    "moment": "Le matin ou le soir, chaque jour à la même heure.",
+    "ingredients": "Huile de colza, ghee (beurre clarifié, matière grasse laitière anhydre)* 420 mg, poudre de shatavari (Asparagus racemosus Willd.)* 350 mg, émulsifiant : lécithine de tournesol.",
+    "precautions": "Déconseillé aux femmes enceintes ou allaitantes et aux moins de 16 ans. Déconseillé en cas de cancer hormonodépendant ou de troubles de la coagulation. Sous traitement médical, demander conseil à un spécialiste. Ne pas dépasser la dose journalière indiquée.",
+  },
+  {
+    "slug": "tribulus", "name": "Tribulus", "full": "Tribulus & ghee suisse",
+    "latin": "Tribulus terrestris", "origin": "Asie", "color": "#F5D94C",
+    "intent": "Masculin", "intent_key": "masculin",
+    "tagline": "La vitalité masculine, version tradition.",
+    "short": "350 mg d'extrait de Tribulus terrestris, dont 315 mg de saponines, uni à 500 mg de ghee suisse.",
+    "story": "Utilisé depuis longtemps par l'ayurvéda et diverses traditions naturelles, le tribulus est apprécié pour ses saponines végétales. Il s'adresse aux hommes qui cherchent à intégrer une plante de tradition à leur routine, au rythme d'une gélule par jour, avec le ghee suisse comme compagnon.",
+    "points": ["350 mg d'extrait par gélule", "Dont 315 mg de saponines", "Plante de tradition ayurvédique", "500 mg de ghee issu de lait suisse"],
+    "moment": "Le matin, avec le petit-déjeuner.",
+    "ingredients": "Ghee (beurre clarifié, matière grasse laitière anhydre)* 500 mg, extrait de Tribulus terrestris 350 mg dont saponines 315 mg, huile de colza, émulsifiant : lécithine de tournesol.",
+    "precautions": "Toute personne sous traitement médical ou présentant une pathologie hormonodépendante doit demander conseil à un professionnel de santé. En cas de troubles digestifs ou d'agitation, réduire ou arrêter la prise. Ne pas dépasser la dose recommandée.",
+  },
+  {
+    "slug": "curcuma", "name": "Curcuma", "full": "Curcuma, pipérine & ghee suisse",
+    "latin": "Curcuma longa + Piper nigrum", "origin": "Inde / Asie", "color": "#E77F0A",
+    "intent": "Rituel quotidien", "intent_key": "quotidien",
+    "tagline": "L'or des épices, sublimé par le poivre noir et le ghee.",
+    "short": "340 mg de curcuma associés à la pipérine du poivre noir et à 493 mg de ghee suisse.",
+    "story": "Curcuma, poivre noir et matière grasse : c'est le trio que la cuisine et l'ayurvéda associent depuis toujours. La pipérine du poivre noir est étudiée pour son rôle dans l'assimilation de la curcumine. Nous y ajoutons un ghee suisse pour respecter la formule traditionnelle, dans une gélule.",
+    "points": ["340 mg de curcuma par gélule", "Avec pipérine (extrait de poivre noir)", "Le trio traditionnel curcuma–poivre–ghee", "493 mg de ghee issu de lait suisse"],
+    "moment": "Au cours d'un repas.",
+    "ingredients": "Ghee (matière grasse laitière anhydre)* 493 mg, curcuma en poudre 340 mg, pipérine (extrait de poivre noir), huile de colza raffinée, lécithine de tournesol.",
+    "precautions": "Réservé à l'adulte. Déconseillé aux femmes enceintes ou allaitantes, en cas de maladie de Crohn ou de pathologie des voies biliaires, et aux personnes traitées par anticoagulants, anticancéreux ou immunosuppresseurs. Sous traitement médical, demander conseil à un spécialiste. Ne pas dépasser la dose journalière indiquée.",
+  },
+]
+
+FAQ = [
+  ("Qu'est-ce que le ghee ?", "Le ghee est un beurre clarifié : on chauffe lentement le beurre pour en retirer l'eau et les protéines du lait, jusqu'à obtenir une matière grasse pure, dorée et stable. En ayurvéda, il est considéré depuis des millénaires comme un support de choix pour les plantes. Le ghee VK Swiss est produit en Suisse à partir de lait suisse."),
+  ("Pourquoi associer des plantes ayurvédiques à du ghee ?", "Dans la tradition ayurvédique, les plantes sont très souvent préparées ou consommées avec une matière grasse, le ghee en premier lieu, considéré comme un « véhicule » des actifs. VK Swiss reprend ce principe ancestral et l'encapsule : chaque gélule contient la plante et le ghee suisse."),
+  ("Comment prendre les gélules VK Swiss ?", "Une gélule par jour, avec un verre d'eau ou un autre liquide. Un pot contient 30 gélules individuelles, soit une cure d'un mois. Ne dépassez pas la dose journalière indiquée."),
+  ("Puis-je combiner plusieurs formules ?", "Chaque formule est pensée pour être prise seule, à raison d'une gélule par jour. Avant d'en associer plusieurs, en particulier si vous suivez un traitement, demandez conseil à votre pharmacien ou à votre médecin, ou appelez-nous."),
+  ("Les gélules conviennent-elles aux femmes enceintes ?", "Non. Les formules VK Swiss sont déconseillées aux femmes enceintes ou allaitantes. Les personnes sous traitement médical doivent demander conseil à un spécialiste avant toute prise."),
+  ("Quels sont les allergènes ?", "Le ghee est une matière grasse laitière et l'enveloppe de la gélule est en gélatine de poisson. Les gélules ne conviennent donc ni aux personnes allergiques au lait ou au poisson, ni aux régimes végétaliens."),
+  ("Où sont fabriqués les produits VK Swiss ?", "Les compléments VK Swiss sont fabriqués en Suisse. Le ghee est produit en Suisse à partir de lait suisse ; les plantes proviennent de leurs régions d'origine (Inde, Asie). Les produits sont distribués par AXES Sàrl, à Bassecourt (Jura)."),
+  ("Quels moyens de paiement acceptez-vous ?", "TWINT, cartes Visa, Mastercard et American Express, Apple Pay, Google Pay, PayPal et PostFinance Pay. Les paiements sont traités par des prestataires certifiés : nous n'avons jamais accès à vos données bancaires."),
+  ("Quels sont les délais et frais de livraison ?", "Les commandes sont expédiées depuis la Suisse par La Poste. [Délais et tarifs à confirmer par VK Swiss.] La livraison est offerte dès CHF 80.– d'achat en Suisse."),
+  ("Où trouver VK Swiss en pharmacie ?", "VK Swiss est disponible dans plus de 120 pharmacies et drogueries en Suisse (Jura, Berne, Valais, Genève, Vaud, Neuchâtel, Fribourg, Tessin, Zurich, Bâle…), ainsi qu'en France, à Monaco, en Italie, au Luxembourg et en Belgique. Consultez la page Points de vente."),
+]
+
+# Points de vente Suisse (relevés sur vk-swiss.ch)
+STORES = {
+ "Jura": [("Au jardin de Cérès","Rue des Tanneurs 3, 2900 Porrentruy"),("Droguerie de l'Aubier","Rte Principale 43, 2824 Vicques"),("Droguerie L'Etamine","Rue Préfet-Comte 12, 2852 Courtételle"),("PharmaciePlus Voirol SA","Rue Colonel-Hoffmeyer 39, 2854 Bassecourt"),("Pharmacie Erard","Rue du 23 Juin 24, 2942 Alle"),("Pharmacie St-Hubert","Rue du Doubs 1, 2340 Le Noirmont"),("Pharmacie de la Gare","Avenue de la Gare 13, 2740 Moutier"),("Pharmacie du Canal","Rte de Delémont 13, 2830 Courrendlin"),("Pharmacie du Centre","Rte de Moutier 11, 2800 Delémont")],
+ "Berne": [("Droguerie du Vallon","Rue Francillon 21, 2610 Saint-Imier"),("Droguerie Kropf GmbH","Chem. Geyisried 4, 2504 Bienne"),("Gstaaderhof Pharmacy","Lauenenstrasse 20, 3780 Gstaad"),("Pharmacie Jaggi","Dorfstrasse 54, 3792 Saanen"),("Naturdrogerie Bern","Giacomettistrasse 15, 3006 Berne"),("Dr. Noyer Pharmacie","Schauplatzgasse 7, 3011 Berne"),("Ayurveda & Yoga Lab","Rue de la Gare 38, 2502 Bienne"),("Düby AG","Marktgasse 23, 4900 Langenthal"),("Drogerie Renfer Beat","Bielstrasse 1, 2543 Lengnau"),("PharmaciePlus du Vallon","Rue Francillon 4, 2610 St-Imier")],
+ "Valais": [("Droguerie Sierroise","Rue du Bourg 4, 3960 Sierre"),("Droguerie Beaulieu","Route de l'Hôpital 4, 3960 Sierre"),("PharmaciePlus Lauber","Avenue de la Gare 7, 1920 Martigny"),("PharmaciePlus Grand'Vigne","Rue du Bourg-Dernier 23, 1896 Vouvry"),("Pharma Crans","Grand Place 7, 3963 Crans-Montana"),("Droguerie Garrone","Av. de l'Industrie 8, 1870 Monthey"),("PharmaciePlus de Vétroz","Route Cantonale 90, 1963 Vétroz"),("PharmaciePlus Uvrier Centre","Route d'Italie 115, 1958 Uvrier"),("Pharmacie de l'Abbaye","Route de Verbier 11, 1934 Le Châble"),("Pharmacie von Roten Centre Migros","Chemin de Provence 4, 1926 Fully"),("Pharmacie Internationale Verbier","Place Centrale 4, 1936 Verbier"),("Pharmacie Gindre","Rue de Lausanne 49, 1950 Sion"),("Pharmacie Conthey Centre","Route Cantonale 18, 1964 Conthey"),("Pharmacie Centrale","Place Centrale 4, 1920 Martigny")],
+ "Genève": [("PharmaciePlus de Grenus","Place de Grenus 12, 1201 Genève"),("Pharmacie Impériale","Rue de Coutance 7, 1201 Genève"),("Pharmacie Vergell","Rue Paul Bouchet 5, 1201 Genève"),("Pharmacie Bedat","Boulevard James-Fazy 7, 1201 Genève"),("PharmaciePlus du Rondeau","Rue Ancienne 84, 1227 Carouge"),("Pharmacie Bleue","Route de Thonon 60, 1222 Vésenaz"),("Pharmacie des Philosophes","Boulevard des Philosophes 16, 1205 Genève"),("Pharmacie de l'Hôpital","Rue Lombard 15, 1205 Genève"),("Faust Pharmacie","Rue de Vermont 14, 1202 Genève"),("Pharmacie de Bernex","Rue de Bernex 260, 1233 Bernex"),("Pharmacie Dolea","Rue Daubin 22, 1203 Genève"),("Pharmacie de Veyrier","Rte de Veyrier 255, 1255 Veyrier"),("Pharmacie du Chêne-Vert","Rue de Genève 94, 1226 Thônex"),("Pharmacie Plaza","Rue du Cendrier 21, 1201 Genève"),("Pharmacie de la Bâtie","Chem. du Repos 6, 1213 Petit-Lancy"),("Pharmacie de la Fontenette","Rue de la Fontenette 23, 1227 Carouge"),("Pharmacie des Alpes","Rue des Alpes 17, 1201 Genève"),("Pharmacie du Bourg-de-Four","Pl. du Bourg-de-Four 10/12, 1204 Genève"),("PharmaciePlus du Mortier d'Or","Rue de Coutance 12, 1201 Genève"),("Pharmacie de Miremont","Av. de Champel 59, 1206 Genève"),("Pharmacie Gouda","Av. Antoine-Marie Mirany 20, 1225 Chêne-Bourg"),("Pharmacie Eaux-Vives-Lac","Rue des Eaux-Vives 16, 1207 Genève"),("Pharmacie Internationale","Place des Alpes 2, 1201 Genève"),("Pharmacie de la Chapelle","Chemin de Compostelle 7, 1212 Grand-Lancy"),("Pharmacie de Villereuse","Rue de la Terrassière 32, 1207 Genève")],
+ "Vaud": [("Droguerie de Villeneuve","Grand Rue 37, 1844 Villeneuve"),("Droguerie du Portail","Grand-Rue 64, 1530 Payerne"),("Pharmacie Holistique de la Riviera","Av. des Planches 22C, 1820 Montreux"),("Droguerie Herboristerie Sylvie Pollien","Rte Aloys-Fauquez 95, 1018 Lausanne"),("Pharmacie de la Clergère","Ch. du Pré-de-la-Tour 10, 1009 Pully"),("Sen'Sù SA – Agora intégrative","Rue Saint-Pierre 4, 1003 Lausanne"),("Pharmacie de Genolier","Rte de la Gare 5, 1272 Genolier"),("Pharmacie Droguerie d'Ollon","Place de l'Hôtel de Ville 2, 1867 Ollon"),("PharmaciePlus Fleury","Av. Centrale 123, 1884 Villars-sur-Ollon"),("Pharmacie Métro Ouchy","Place de la Navigation, 1006 Lausanne"),("Droguerie d'Aigle","Rue Farel 10, 1860 Aigle"),("PharmaciePlus du Marché","Grande Place 2, 1800 Vevey"),("PharmaciePlus du Flon","Voie du Chariot 6, 1003 Lausanne"),("PharmaciePlus de la Fauvette","Avenue de Chailly 6, 1012 Lausanne"),("PharmaciePlus Centrale Nyon","Rue de la Morâche 9, 1260 Nyon"),("Pharmacie Métro Flon","Pl. de l'Europe 5, 1003 Lausanne"),("Pharmacie Populaire de la Tour","Rue de l'Ale 40, 1003 Lausanne"),("Pharmacie de la Planchette","Chem. de la Planchette 3, 1860 Aigle"),("PharmaciePlus Plan-Soleil","Av. du Général-Guisan 24, 1800 Vevey"),("Pharmacie de Grandson","Rue Haute 2, 1422 Grandson"),("Pharmacie Pharm-Y-Parc","Av. des Découvertes 3, 1400 Yverdon-les-Bains")],
+ "Neuchâtel": [("Pharmacie de la Gare","Place de la Gare 4, 2300 La Chaux-de-Fonds"),("Pharmacie Pillonel","Balancier 7, 2300 La Chaux-de-Fonds"),("PharmaciePlus Bourquin","Grand'Rue 11, 2108 Couvet"),("PharmaciePlus du Val-de-Travers","Près-de-la-Porte, 2108 Couvet"),("PharmaciePlus de l'Orangerie","Faubourg de l'Hôpital, 2000 Neuchâtel"),("PharmaciePlus de Colombier","Rue Haute 23a, 2013 Colombier"),("PharmaciePlus du Bourg Marin","Auguste-Bachelin 11, 2074 Marin-Epagnier"),("PharmaciePlus de la Rosière","Rue des Parcs 84, 2000 Neuchâtel"),("Pharmacie de la Gare","Place de la Gare 1, 2000 Neuchâtel"),("Droguerie Schneitter","Rue de l'Hôpital 19, 2000 Neuchâtel"),("Pharmacie de l'Ecluse","Rue de l'Ecluse 38, 2000 Neuchâtel"),("Pharmacie Centrale","Av. Léopold-Robert 47-49, 2300 La Chaux-de-Fonds")],
+ "Fribourg": [("Droguerie Roggen-Le Brun","Grand-Rue 27, 1470 Estavayer-le-Lac"),("Pharmacie du Levant","Rte de Riaz 6, 1630 Bulle"),("Droguerie Moennat","Rue de Gruyères 22, 1630 Bulle"),("PharmaciePlus Repond","Rue de Gruyères 35, 1630 Bulle"),("Pharmacie de Chénens","Route du Pontet 19, 1744 Chénens"),("Pharmacie Champ de l'Orme","Route du Château-d'Affry 6, 1762 Givisiez"),("Pharmacie de Givisiez","Route Jo-Siffert 4, 1762 Givisiez"),("Pharmacie-Droguerie MarlyMed","Rte du Midi 12A, 1723 Marly"),("PharmaciePlus du Bourg","Pl. de l'Hôtel de Ville 1, 1700 Fribourg")],
+ "Tessin": [("Farmacia Rossetti","Contrada dei Rossetti 8, 6710 Biasca"),("Farmacia 5 Vie","Piazza Cinque Vie 5, 6932 Breganzona"),("Farmacia Sant'Antonio","Contrada Busi 3, 6816 Bissone"),("PharmaciePlus Malè","Piazza Indipendenza 4, 6500 Bellinzona"),("Farmacia Elvetica","Piazza Stazione 4, 6600 Muralto"),("PharmaciePlus Centro","Via Mezzana 31A, 6616 Losone"),("PharmaciePlus delle Semine","Via Tommaso Rodari 3, 6500 Bellinzona")],
+ "Zurich": [("Droguerie Pieren","Forchstrasse 143, 8132 Egg"),("Zum Grünen Hof","Seestrasse 2, 8330 Pfäffikon"),("Droguerie Schnellmann","Gotthardstrasse 37, 8800 Thalwil"),("Droguerie Roth","Dorfstrasse 84, 8706 Meilen"),("Droguerie Rusconi Star&Smile","Bauelenzelgstrasse 10, 8194 Hüntwangen"),("Centrum Drogerie AG","Kappenbühlweg 5, 8049 Zurich"),("BioHuus GmbH","Alte Landstrasse 92, 8702 Zollikon"),("Droguerie Süess","Zugerstrasse 58, 8820 Wädenswil"),("Drogerie Teufer AG","Turmstrasse 17, 8330 Pfäffikon")],
+ "Bâle, Soleure, Lucerne, Thurgovie": [("Rosen Apotheke","Rudolfstrasse 4, 4054 Bâle"),("Breite-Apotheke AG","Zürcherstrasse 97, 4052 Bâle"),("Natürlich Berger","Hauptstrasse 49, 4450 Sissach"),("Droguerie Nagel","Hauptgasse 9, 4500 Soleure"),("Hildegard Drogerie","Marktplatz 14, 2540 Granges"),("Naturdrogerie Frey","Luzernerstrasse 26, 6010 Kriens"),("Drogerie-Parfümerie Fischer","Hauptstrasse 79, 8274 Tägerwilen")],
+}
