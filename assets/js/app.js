@@ -138,6 +138,9 @@
 
   /* ---------- Film publicitaire ---------- */
   var pub = $("#pub");
+  var vtt = $("#pub-vtt");
+  if (pub && vtt) { try { var tr = document.createElement("track"); tr.kind = "captions"; tr.srclang = "fr"; tr.label = "Français"; tr.default = true;
+    tr.src = URL.createObjectURL(new Blob([vtt.textContent.trim() + "\n"], { type: "text/vtt" })); pub.appendChild(tr); } catch (e) {} }
   if (pub) {
     var fr = pub.parentNode;
     $$("[data-film-play]").forEach(function (b) { b.addEventListener("click", function () { pub.muted = false; pub.play(); }); });

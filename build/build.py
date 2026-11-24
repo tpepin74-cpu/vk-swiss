@@ -224,8 +224,22 @@ def page_home():
  <div class="film__frame rv">
   <video id="pub" preload="none" playsinline controls poster="assets/img/pub-poster.jpg" aria-describedby="film-transcript">
    <source src="assets/video/pub-720.mp4" type="video/mp4" media="(max-width: 860px)"><source src="assets/video/pub.mp4" type="video/mp4">
-   <track kind="captions" src="assets/video/pub.fr.vtt" srclang="fr" label="Français" default>
   </video>
+  <script type="text/vtt" id="pub-vtt">
+WEBVTT
+
+00:00:04.500 --> 00:00:11.200
+Au cœur des Alpes suisses, le lait des alpages donne naissance à un or pur : le ghee.
+
+00:00:13.500 --> 00:00:22.300
+Depuis des millénaires, l'ayurvéda l'associe aux plantes les plus précieuses. Ashwagandha. Curcuma. Shilajit.
+
+00:00:27.500 --> 00:00:35.600
+VK Swiss réunit ces deux mondes, en six formules d'exception. Une seule gélule par jour. Fabriquée en Suisse.
+
+00:00:42.500 --> 00:00:53.700
+Commencez votre rituel dès aujourd'hui, en pharmacie ou sur vk-swiss.ch. VK Swiss. L'or des Alpes, la sagesse de l'ayurvéda.
+  </script>
   <button class="film__play" type="button" data-film-play aria-label="Lire le film VK Swiss avec le son"><span aria-hidden="true"></span>Regarder le film · 55 s</button>
  </div>
  <div class="film__cta rv"><a class="btn btn--red" href="boutique.html">Découvrir la collection</a><button class="btn btn--light" type="button" data-ast-open aria-controls="ast">Trouver ma formule</button></div>
